@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.silverio.Curso.entities.Category;
 import com.silverio.Curso.entities.Order;
+import com.silverio.Curso.entities.OrderItem;
 import com.silverio.Curso.entities.Product;
 import com.silverio.Curso.entities.User;
 import com.silverio.Curso.entities.enums.OrderStatus;
 import com.silverio.Curso.repositories.CategoryRepository;
+import com.silverio.Curso.repositories.OrderItemRepository;
 import com.silverio.Curso.repositories.OrderRepository;
 import com.silverio.Curso.repositories.ProductRepository;
 import com.silverio.Curso.repositories.UserRepository;
@@ -30,6 +32,8 @@ public class TestConfig implements CommandLineRunner {
 	private CategoryRepository categoryRepository;
 	@Autowired
 	private ProductRepository productRepository;
+	@Autowired
+	private OrderItemRepository orderitemRepository;
 	
 	
 	
@@ -72,7 +76,21 @@ public class TestConfig implements CommandLineRunner {
 		userRepository.saveAll(Arrays.asList(u1,u2));
 		orderRepository.saveAll(Arrays.asList(o1,o2,o3));
 		
+		OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice()); 
+		OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice()); 
+		OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice()); 
+		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice()); 
 		
+		orderitemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+		
+		
+		
+	}
+
+
+
+	public OrderItemRepository getOrderitemRepository() {
+		return orderitemRepository;
 	}
 
 }
