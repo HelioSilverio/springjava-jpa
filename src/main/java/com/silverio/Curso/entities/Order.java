@@ -108,7 +108,13 @@ private Set<OrderItem>items=new HashSet<>();
 	public  Set<OrderItem>getItems() {
 		return items;
 	}
-	
+	public Double getTotal() {
+		double soma =0.0;
+		for (OrderItem x : items) {
+			soma+=x.getSubTotal();
+		}
+		return soma;
+	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
