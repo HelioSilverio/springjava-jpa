@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.silverio.Curso.entities.User;
 import com.silverio.Curso.repositories.UserRepository;
+import com.silverio.Curso.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class UserService {
@@ -18,9 +19,11 @@ public class UserService {
 	public List<User>findAll(){
 	return repository.findAll();
 	}
+	
+	
 	public User findById(Long id) {
 		Optional<User> Obj=repository.findById(id);
-		return Obj.get();
+		return Obj.orElseThrow(() -> new ResourceNotFoundException (id));
 	}
 	public User insert(User obj) {
 		return repository.save(obj);
